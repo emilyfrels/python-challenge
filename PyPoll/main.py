@@ -18,78 +18,82 @@ vote_count = 0
 # Create a dictionary to store all candidate info
 candidates = {}
 
+with open(output_path, 'w') as txtfile:
 
-# Open the csv and open the ouput texttfile
-with open(csvpath) as election_data, open(output_path, 'a') as txtfile:
+    # Open the csv and open the ouput texttfile
+    with open(csvpath) as election_data:
 
-    # CSV reader specifies delimiter and variable that holds contents
-    csvreader = csv.reader(election_data, delimiter=',') 
+        # CSV reader specifies delimiter and variable that holds contents
+        csvreader = csv.reader(election_data, delimiter=',') 
 
-    # Check to make sure file is being read
-    # print(election_data)
-
-    # Print a title and a spacer
-    
-    # Skipping the header in the csv
-    csv_header = next(csvreader)
-
-
-
-    # Find the complete list of candidates who received votes
-    # Start by looping through each row
-    for row in csvreader:
-
-        # Calculate total number of votes
-        total_votes = total_votes + 1
         
-        # Create a list to store candidates names
-        name = row[2]
-
-        if name not in candidates:
-            # If name not in list of candidates, add it to the candidate list
-            candidates[name] = 1
-        else:
-            # Track number of votes per candidate name
-            candidates[name] = candidates[name] + 1
-
-
-# Print header of output with formatting lines
-print("Election Results")
-print("------------------")
-
-
-# Print total number of votes with formatting lines
-print(f"Total Votes: {total_votes}")
-print("------------------")
+        # Skipping the header in the csv
+        csv_header = next(csvreader)
 
 
 
-for candidate_name, vote_count in candidates.items():
-    # Calculate the percentage of votes per candidate
-    percentage = (vote_count / total_votes) * 100
-    # Print candidate name, percentage of votes, and number of votes
-    print(f"{candidate_name}: " + "{:.3f}".format(percentage) + "%" + " (" + str(vote_count) + ")")
+        # Find the complete list of candidates who received votes
+        # Start by looping through each row
+        for row in csvreader:
 
-# Find the max value of votes by sorting the values in the vote count list
-sorted_values = sorted(candidates.values(), reverse=True)
-#print(sorted_values)
-#print(sorted_values[0])
+            # Calculate total number of votes
+            total_votes = total_votes + 1
+            
+            # Create a list to store candidates names
+            name = row[2]
 
-# Assign variable to the largest number
-winner = sorted_values[0]
-# print(winner)
+            if name not in candidates:
+                # If name not in list of candidates, add it to the candidate list
+                candidates[name] = 1
+            else:
+                # Track number of votes per candidate name
+                candidates[name] = candidates[name] + 1
 
-# print(vote_count)
 
-# Loop through to find if the largest vote count value matches any of the vote counts and display the winner
-for candidate_name, vote_count in candidates.items():
+    # Print header of output with formatting lines
+    print("Election Results")
+    txtfile.write("Election Results\n")
+    print("------------------")
+    txtfile.write("------------------\n")
 
-    if vote_count == winner:
-        # Print results
-        print("------------------")
-        print(f"Winner: {candidate_name}")
-        print("------------------")
 
+    # Print total number of votes with formatting lines
+    print(f"Total Votes: {total_votes}")
+    print("------------------")
+    txtfile.write(f"Total Votes: {total_votes}\n")
+    txtfile.write("------------------\n")
+
+    # Look in the dictionary for each candidate and vote count to figure out percentage of total votes
+
+    for candidate_name, vote_count in candidates.items():
+        # Calculate the percentage of votes per candidate
+        percentage = (vote_count / total_votes) * 100
+        # Print candidate name, percentage of votes, and number of votes
+        print(f"{candidate_name}: " + "{:.3f}".format(percentage) + "%" + " (" + str(vote_count) + ")")
+        txtfile.write(f"{candidate_name}: " + "{:.3f}".format(percentage) + "%" + " (" + str(vote_count) + ")\n")
+
+    # Find the max value of votes by sorting the values in the vote count list
+    sorted_values = sorted(candidates.values(), reverse=True)
+    #print(sorted_values)
+    #print(sorted_values[0])
+
+    # Assign variable to the largest number
+    winner = sorted_values[0]
+    # print(winner)
+
+    # print(vote_count)
+
+    # Loop through to find if the largest vote count value matches any of the vote counts and display the winner
+    for candidate_name, vote_count in candidates.items():
+
+        if vote_count == winner:
+            # Print results
+            print("------------------")
+            print(f"Winner: {candidate_name}")
+            print("------------------")
+            txtfile.write("------------------\n")
+            txtfile.write(f"Winner: {candidate_name}\n")
+            txtfile.write("------------------\n")
 
 
 
