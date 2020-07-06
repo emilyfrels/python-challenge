@@ -70,32 +70,25 @@ for candidate_name, vote_count in candidates.items():
     # Print candidate name, percentage of votes, and number of votes
     print(f"{candidate_name}: " + "{:.3f}".format(percentage) + "%" + " (" + str(vote_count) + ")")
 
+# Find the max value of votes by sorting the values in the vote count list
 sorted_values = sorted(candidates.values(), reverse=True)
 #print(sorted_values)
 #print(sorted_values[0])
 
+# Assign variable to the largest number
 winner = sorted_values[0]
-print(winner)
+# print(winner)
 
-print(vote_count)
+# print(vote_count)
+
+# Loop through to find if the largest vote count value matches any of the vote counts and display the winner
 for candidate_name, vote_count in candidates.items():
+
     if vote_count == winner:
+        # Print results
+        print("------------------")
         print(f"Winner: {candidate_name}")
-
-
-# for candidate_name, vote_count in candidates.values():
-#     sorted_values = sorted(candidates.values(), reverse=True)
-#     print(sorted_values[0])
-#     winner = sorted_values[0]
-#     print("------------------")
-#     print(f"Winner: {winner} {candidate_name}")
-#     print("------------------")
-#     if winner == vote_count:
-#         print(f"Winner: {candidate_name}")
-
-# Print formatting line for readability
-print("------------------")
-print("------------------")
+        print("------------------")
 
 
 
