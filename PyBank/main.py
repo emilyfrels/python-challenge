@@ -79,20 +79,16 @@ with open(output_path, 'w') as txtfile:
         csv_header = next(csvreader)
         next(csvreader)
 
-        for row in csvreader:
-
-            # Loop through first and second row to find the two values
-            current_row = row[1]
-            print(f"current row {current_row}")
+        average_change = total_pl / total_months
+        greatest_increase = max(row[1])
+        greatest_decrease = min(row[1])
 
 
-
-
-    print("Average Change: ")
-    txtfile.write(f"Average Change: \n")
-    print("Greatest Increase in Profits: ")
-    txtfile.write(f"Greatest Increase in Profits: \n")
-    print("Greatest Decrease in Profits: ")
-    txtfile.write(f"Greatest Decrease in Profits: \n")
+    print(f"Average Change: {average_change}")
+    txtfile.write(f"Average Change: {average_change}\n")
+    print(f"Greatest Increase in Profits: {greatest_increase}")
+    txtfile.write(f"Greatest Increase in Profits: {greatest_increase}\n")
+    print(f"Greatest Decrease in Profits: {greatest_decrease}")
+    txtfile.write(f"Greatest Decrease in Profits: {greatest_decrease}\n")
 
         
