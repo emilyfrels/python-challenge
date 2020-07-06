@@ -65,15 +65,36 @@ print("------------------")
 
 
 for candidate_name, vote_count in candidates.items():
+    # Calculate the percentage of votes per candidate
     percentage = (vote_count / total_votes) * 100
     # Print candidate name, percentage of votes, and number of votes
     print(f"{candidate_name}: " + "{:.3f}".format(percentage) + "%" + " (" + str(vote_count) + ")")
 
+sorted_values = sorted(candidates.values(), reverse=True)
+#print(sorted_values)
+#print(sorted_values[0])
 
+winner = sorted_values[0]
+print(winner)
+
+print(vote_count)
+for candidate_name, vote_count in candidates.items():
+    if vote_count == winner:
+        print(f"Winner: {candidate_name}")
+
+
+# for candidate_name, vote_count in candidates.values():
+#     sorted_values = sorted(candidates.values(), reverse=True)
+#     print(sorted_values[0])
+#     winner = sorted_values[0]
+#     print("------------------")
+#     print(f"Winner: {winner} {candidate_name}")
+#     print("------------------")
+#     if winner == vote_count:
+#         print(f"Winner: {candidate_name}")
 
 # Print formatting line for readability
 print("------------------")
-print("Winner: ")
 print("------------------")
 
 
