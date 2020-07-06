@@ -6,11 +6,10 @@ import csv
 
 
 # Set variable and location of csv file
-
 csvpath = os.path.join('Resources', 'election_data.csv')
 
-# Check to make sure the file path is correct
-# print(csvpath)
+# Set variable and location of output text file
+output_path = os.path.join('analysis', 'poll_analysis.txt')
 
 # Set initial amount for total number of votes per candidate
 total_votes = 0
@@ -20,9 +19,8 @@ vote_count = 0
 candidates = {}
 
 
-
-# Open the csv
-with open(csvpath) as election_data:
+# Open the csv and open the ouput texttfile
+with open(csvpath) as election_data, open(output_path, 'a') as txtfile:
 
     # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(election_data, delimiter=',') 
@@ -53,34 +51,34 @@ with open(csvpath) as election_data:
         else:
             # Track number of votes per candidate name
             candidates[name] = candidates[name] + 1
-    # print(candidates[name])
+
 
 # Print header of output with formatting lines
 print("Election Results")
 print("------------------")
 
+
 # Print total number of votes with formatting lines
 print(f"Total Votes: {total_votes}")
 print("------------------")
 
-# Loop through to find the candidates and their vote counts and calculate percentage of the votes
-    
+
+
 for candidate_name, vote_count in candidates.items():
     percentage = (vote_count / total_votes) * 100
     # Print candidate name, percentage of votes, and number of votes
     print(f"{candidate_name}: " + "{:.3f}".format(percentage) + "%" + " (" + str(vote_count) + ")")
 
 
+
 # Print formatting line for readability
+print("------------------")
+print("Winner: ")
 print("------------------")
 
 
-# print(total_votes)
 
-# for candidate_name, vote_count in candidates_votes.items():
-#     print(f"{candidate_name}: {vote_count}")
 
-# print(candidates_votes)
 
 
 
